@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xlmns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ana Sayfa</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="images/0.png" width="50" height="50" >
+        <a class="navbar-brand" th:href="@{/home}">ProDENT Clinic Professional </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/home}">Ana Sayfa <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/allEmployees}">Müşteriler</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/allPayments}">Ödemeler</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-justified" th:href="@{/allAppointments}">Randevular</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</head>
+<body>
+    <img id="bg-homepage" th:src="@{images/0.png}" class="rounded mx-auto d-block">
+</body>
+</html>

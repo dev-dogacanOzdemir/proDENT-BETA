@@ -1,0 +1,104 @@
+<html xlmns="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Müşteriler</title>
+	<!-- jQuery Datatable ve Bootstrap4 implementasyonunu sağladık-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
+	<link rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<img src="images/0.png" width="50" height="50" >
+		<a class="navbar-brand" th:href="@{/home}">ProDENT Clinic Professional </a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="nav nav-pills nav-fill">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/home}">Ana Sayfa <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/allEmployees}">Müşteriler</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/allPayments}">Ödemeler</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link nav-justified" th:href="@{/allAppointments}">Randevular</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</head>
+<body>
+
+	<div class = "container">
+		<h2 >Müşteriler</h2>
+		<hr/>
+
+		<table class="table table-bordered table-striped" id="musteri-table">
+			<thead>
+			<!-- Bu kısımda tablomuzu oluşturduk. -->
+				<tr>
+					<th>T.C. Kimlik Numarası</th>
+					<th>İsim</th>
+					<th>Soyisim</th>
+					<th>Adres</th>
+					<th>Telefon</th>
+					<th>Cinsiyet</th>
+					<th>Doğum Tarihi</th>
+					<th>Kan Grubu</th>
+					<th>İşlemler</th>
+			<thead/>
+			<tbody>
+			<!-- Bağlantılar ile ilgili olan parametreleri mySQL'den getiriyoruz. -->
+				<tr th:each="employee : ${employees}">
+					<td th:text = "${employee.musteriTc}"></td>
+					<td th:text = "${employee.musteriAd}"></td>
+					<td th:text = "${employee.musteriSoyad}"></td>
+					<td th:text = "${employee.musteriAdres}"></td>
+					<td th:text = "${employee.musteriTelefon}"></td>
+					<td th:text = "${employee.musteriCinsiyet}"></td>
+					<td th:text = "${employee.musteriDogumTarihi}"></td>
+					<td th:text = "${employee.musteriKanGrubu}"></td>
+					<td>
+						<!--Değiştirme ve silme butonlarını tanımladık-->
+						<a th:href="@{/updateEmployee(musteriID=${employee.musteriID})}"
+						   class="btn btn-info">Değiştir</a>
+						<a th:href="@{/deleteEmployee(musteriID=${employee.musteriID})}"
+						   class="btn btn-danger ml-2">Sil</a>
+					</td>
+
+			</tbody>
+
+		
+		</table>
+		<!-- Yeni müşteri ekleme butonunu tanımladık. Bizi müşteri ekleme sayfasına yönlendiriyor. -->
+		<a th:href="@{/addEmployee}" class = "btn btn-primary">Müşteri Ekle</a>
+	</div>
+	<!-- jQuery Datatables kurulumunu kaynağından yükledik.-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.js"></script>
+	<!-- Tablomuzu jQuery Datatable ile bağladık.-->
+	<script>
+		$(document).ready(function() {
+			 $('#musteri-table').DataTable({
+				 //Bu kısımda İşlemler kolonunun sıralama yapmasını kapattık.
+				 'aoColumnDefs' : [{
+					 'bSortable': false,
+					 'aTargets' : [-1] //-1 indexi İşlemler kolonunun indexidir.
+				 }]
+			 });
+		})
+	</script>
+
+</body>
+
+
+
+
+</html>
